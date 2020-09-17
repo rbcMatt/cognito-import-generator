@@ -18,7 +18,7 @@ const createUser = () => {
     email,
     email_verified: true,
     gender: chance.gender(),
-    birthdate: chance.date(),
+    birthdate: null,
     zoneinfo: null,
     locale: chance.locale(),
     phone_number: `+1${chance.phone({ formatted: false })}`,
