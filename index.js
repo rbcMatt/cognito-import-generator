@@ -2,36 +2,38 @@ const chance = require('chance')();
 const uuid = require('uuid');
 const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
 const fs = require('fs');
-const { create } = require('domain');
 
-const createUser = () => ({
-  name: chance.first(),
-  given_name: chance.first(),
-  family_name: chance.last(),
-  middle_name: chance.first(),
-  nickname: chance.first(),
-  preferred_username: chance.first(),
-  profile: chance.url(),
-  picture: chance.url(),
-  website: chance.url(),
-  email: chance.email(),
-  email_verified: true,
-  gender: chance.gender(),
-  birthdate: chance.date(),
-  zoneinfo: null,
-  locale: chance.locale(),
-  phone_number: `+1${chance.phone({ formatted: false })}`,
-  phone_number_verified: true,
-  address: chance.address(),
-  updated_at: null,
-  'custom:last_login': null,
-  'custom:app_code': 'TUV0',
-  'custom:compliance_id': uuid.v4(),
-  'custom:member_id': uuid.v4(),
-  'custom:activation_date': chance.date(),
-  'cognito:mfa_enabled': false,
-  'cognito:username': `${chance.first()}${chance.last()}@mailinator.com`.trim(),
-});
+const createUser = () => {
+  const email = `${chance.first()}${chance.last()}@mailinator.com`.trim();
+  return {
+    name: chance.first(),
+    given_name: chance.first(),
+    family_name: chance.last(),
+    middle_name: chance.first(),
+    nickname: chance.first(),
+    preferred_username: chance.first(),
+    profile: chance.url(),
+    picture: chance.url(),
+    website: chance.url(),
+    email,
+    email_verified: true,
+    gender: chance.gender(),
+    birthdate: chance.date(),
+    zoneinfo: null,
+    locale: chance.locale(),
+    phone_number: `+1${chance.phone({ formatted: false })}`,
+    phone_number_verified: true,
+    address: chance.address(),
+    updated_at: null,
+    'custom:last_login': null,
+    'custom:app_code': 'TUV0',
+    'custom:compliance_id': uuid.v4(),
+    'custom:member_id': uuid.v4(),
+    'custom:activation_date': chance.date(),
+    'cognito:mfa_enabled': false,
+    'cognito:username': email,
+  }
+};
 
 const getHeaders = () => [...Object.keys(createUser())].map((elem) => ({ id: elem, title: elem }));
 
