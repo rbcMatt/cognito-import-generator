@@ -2,6 +2,7 @@ const chance = require('chance')();
 const uuid = require('uuid');
 const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
 const fs = require('fs');
+const { create } = require('domain');
 
 const createUser = () => ({
   name: chance.first(),
@@ -44,5 +45,6 @@ const fsWriteStream = fs.createWriteStream('users.csv');
 fsWriteStream.write(csvStringifier.getHeaderString());
 
 for (let i = 0; i < usersToGenerate; i += 1) {
-  fsWriteStream.write(csvStringifier.stringifyRecords(createUser()));
+  fsWriteStream.write(csvStringifier.stringifyRecords([createUser()]));
 }
+fsWriteStream.close();
