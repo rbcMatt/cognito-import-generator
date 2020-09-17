@@ -32,7 +32,7 @@ const createUser = () => {
     'custom:activation_date': chance.date(),
     'cognito:mfa_enabled': false,
     'cognito:username': email,
-  }
+  };
 };
 
 const getHeaders = () => [...Object.keys(createUser())].map((elem) => ({ id: elem, title: elem }));
