@@ -1,3 +1,5 @@
+**DEPRECATED** this is now part of rbc-ecosystems/common-auth-utils.
+
 Usage.
 
 ```bash
